@@ -20,18 +20,32 @@ def login(request):
 
 @api_view(['POST'])
 def register(request):
-    serializer= UserSerializer(data=request.data)
+    email = request.data.get('email', '')  # Obtener el correo electrónico del cuerpo de la solicitud
+    if User.objects.filter(email=email).exists():
+        return Response({'error': 'Este correo electrónico ya está en uso'}, status=status.HTTP_400_BAD_REQUEST)
+  
+    serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
 
+        # Obtener el usuario recién creado
         user = User.objects.get(username=serializer.data['username'])
+
+        # Establecer y guardar la contraseña del usuario
         user.set_password(serializer.data['password'])
         user.save()
-        token = Token.objects.create(user=user)
-        return Response({'mensaje': 'Usuario Creado correctamente','user': serializer.data,'token':token.key},status=status.HTTP_201_CREATED)
-        
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        # Crear un token para el usuario
+        token = Token.objects.create(user=user)
+
+        # Devolver la respuesta con el usuario y el token
+        return Response({
+            'mensaje': 'Usuario creado correctamente',
+            'user': serializer.data,
+            'token': token.key
+        }, status=status.HTTP_201_CREATED)
+        
+    return Response({'error': 'Este nombre electrónico ya está en uso'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def profile(request):
