@@ -1,0 +1,12 @@
+###  getAll Users con GET
+GET http://127.0.0.1:8000/api/products
+
+### Crear un User Resgitrandose con POST
+POST http://127.0.0.1:8000/api/products/
+Content-Type: application/json
+
+{
+  "title": "Jijaja",
+  "description": "Si es jajajaj",
+  "done": true
+}
