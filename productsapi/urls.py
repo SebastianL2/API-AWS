@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from dataInventory.views import login, register, profile
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +26,4 @@ urlpatterns = [
     path('api/profile/', profile),
     path('', include('dataInventory.urls')),
 ]
+urlpatterns +=staticfiles_urlpatterns()
