@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from dataInventory.views import login, register, profile
+from dataInventory.views import login,login2, register, profile
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/login/', login),
+    path('api/login/', login2),
     path('api/register/', register),
     path('api/profile/', profile),
     path('', include('dataInventory.urls')),

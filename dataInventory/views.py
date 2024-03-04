@@ -26,6 +26,19 @@ def login(request):
                     status=status.HTTP_200_OK)
 
 @api_view(['POST'])
+def login2(request):
+
+    user=get_object_or_404(User,email=request.data['email'])
+    if not user.check_password(request.data['password']):
+        return Response({"error":"contraseña incorrecta"},status=status.HTTP_400_BAD_REQUEST)
+    token,created= Token.objects.get_or_create(user=user)
+    serializer=UserSerializer(instance=user)
+    data = serializer.data
+    data['token'] = "no permitido"
+    return Response({"Token": token.key ,"user":data,"mensaje":"Sesión iniciada correctamente"},
+                    status=status.HTTP_200_OK)
+
+@api_view(['POST'])
 def register(request):
     email = request.data.get('email', '')  # Obtener el correo electrónico del cuerpo de la solicitud
     if User.objects.filter(email=email).exists():
