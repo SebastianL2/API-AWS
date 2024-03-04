@@ -6,16 +6,19 @@ from .models.modelOrden import Orden
 from .models.modelProduct import Product
 from django.contrib.auth.models import User
 from .serializers import ProductSerializer,EnterpriseSerializer,UserSerializer,ClienteSerializer,OrdenSerializer,CategoriaSerializer
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.authentication import TokenAuthentication
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
+    authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = ProductSerializer
 
 class EnterpriseViewSet(viewsets.ModelViewSet):
     queryset = Enterprise.objects.all()
-    permission_classes = [permissions.AllowAny]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = EnterpriseSerializer
 
 class ClienteViewSet(viewsets.ModelViewSet):

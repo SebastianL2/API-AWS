@@ -131,8 +131,3 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-}

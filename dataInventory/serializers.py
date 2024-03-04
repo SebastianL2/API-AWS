@@ -32,6 +32,7 @@ class OrdenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orden
         fields = '__all__'
+
 class UserSerializer(serializers.ModelSerializer):
      class Meta:
           model = User
