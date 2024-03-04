@@ -7,9 +7,10 @@ from .models.modelProduct import Product
 from django.contrib.auth.models import User
 from .serializers import ProductSerializer,EnterpriseSerializer,UserSerializer,ClienteSerializer,OrdenSerializer,CategoriaSerializer
 
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = ProductSerializer
 
 class EnterpriseViewSet(viewsets.ModelViewSet):
