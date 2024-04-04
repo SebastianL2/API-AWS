@@ -3,9 +3,9 @@ from .api import ProductViewSet,EnterpriseViewSet,OrdenViewSet,ClienteViewSet,Ca
 router= routers.DefaultRouter()
 
 router.register('api/products',ProductViewSet,'products')
-router.register('api/Empresas',EnterpriseViewSet,'enpterprises')
-router.register('api/Categorias',CategoriaViewSet,'categorias')
-router.register('api/Clientes',ClienteViewSet,'clientes')
-router.register('api/Ordenes',OrdenViewSet,'ordenes')
+router.register('api/companies',EnterpriseViewSet,'enpterprises')
+router.register('api/categories',CategoriaViewSet,'categorias')
+router.register('api/customers',ClienteViewSet,'clientes')
+router.register('api/orders',OrdenViewSet,'ordenes')
 urlpatterns = router.urls
 
